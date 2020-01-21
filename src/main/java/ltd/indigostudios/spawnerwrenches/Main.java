@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
                 new SpawnerCommand()
                         .setName("spawner")
                         .setDescription("Change a spawners type")
-                        .setPermission("spawnerwrenches.admin"),
+                        .setPermission("spawnerwrenches.setspawner"),
                 new GiveWrenchCommand()
                         .setName("givewrench")
                         .setDescription("Gives a player a spawner wrench")

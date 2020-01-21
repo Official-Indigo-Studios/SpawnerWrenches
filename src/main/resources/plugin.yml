@@ -20,3 +20,6 @@ permissions:
   spawnerwrenches.admin:
     description: Gives you access to the admin spawner wrenches commands
     default: op
+  spawnerwrenches.setspawner:
+    description: Lets you set the entity type of a spawner
+    default: op
