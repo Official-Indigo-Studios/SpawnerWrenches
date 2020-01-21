@@ -13,7 +13,7 @@ Commands and permissions are extremely simple. Each command uses the admin permi
 Command | Description | Permission
 --- | --- | ---
 `/spawnerwrenches` | Main command for the plugin | `spawnerwrenches.admin`
-`/spawner <entity>` | Set target spawner to a specific type | `spawnerwrenches.admin`
+`/spawner <entity>` | Set target spawner to a specific type | `spawnerwrenches.setspawner`
 `/givespawner <player> <entity> <amount>` | Give a player a spawner | `spawnerwrenches.admin`
 `/givewrench <player> <amount>` | Give a player a spawner wrench | `spawnerwrenches.admin`
 
