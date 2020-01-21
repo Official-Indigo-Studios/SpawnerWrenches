@@ -18,7 +18,7 @@ Command | Description | Permission
 `/givewrench <player> <amount>` | Give a player a spawner wrench | `spawnerwrenches.admin`
 
 ## API
-SilkSpawners has a small API for developers, it contains two very useful events designed around this plugin. (Pickup event only fires when using the spawner wrench)
+SpawnerWrenches has a small API for developers, it contains two very useful events designed around this plugin. (Pickup event only fires when using the spawner wrench)
 
 #### Events
 ```java
