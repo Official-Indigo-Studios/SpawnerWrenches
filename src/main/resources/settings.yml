@@ -1,0 +1,50 @@
+Items:
+  spawner:
+    material: SPAWNER
+    custom-model-data: '0'
+    name: '&d{0} &5Spawner'
+    lore:
+      - ''
+      - ' &7Place to create a &7Spawner.'
+      - ''
+      - ' &c&lNOTICE'
+      - '  &7Can only be picked up using a &5&l&nSpawner Wrench&7!'
+      - ''
+      - '&9Spawner'
+  wrench:
+    material: SHEARS
+    custom-model-data: '0'
+    name: '&5&l&nSpawner Wrench'
+    lore:
+      - ''
+      - ' &7Collect any Spawner by right'
+      - ' &7clicking them with this wrench and'
+      - ' &7it will be immediately placed into'
+      - ' &7your inventory!'
+      - ''
+      - ' &4&l(!) &cWrench is destroyed once used!'
+      - ''
+      - '&bPurchased from &3store.example.com'
+Messages:
+  permission: '&cYou do not have access to that command!'
+  spawner-set-type: '&aSpawner type set to &d{0}'
+  spawner-wrong-type: '&c{0} is not a valid entity!'
+  spawner-not-found: '&cNo spawner block found at target location.'
+  spawner-invalid-entity: '&cIncorrect usage. Please provide a valid entity.'
+  spawner-given: '&aGave &e{0} &a{1}x &d{2} &5Spawner&a!'
+  player-not-found: '&cFailed to find a player {0}'
+  commands-spawner: '&cInvalid usage. Correct usage: &7/givespawner &b<player> &e<type>
+    &a[amount]'
+  commands-wrench: '&cInvalid usage. Correct usage: &7/givewrench &b<player> &a[amount]'
+  invalid-numerical-value: '&cInvalid numerical value entered! Please use whole numbers.'
+  wrench-given: '&aGave &e{0} &a{1}x &5&lSpawner Wrench&a!'
+  help-menu:
+    header: '&8----- &5&lSpawnerWrenches &d&lHelp &8-----'
+    contents:
+      - ''
+      - '&d/spawnerwrenches help &8- &7View the plugin help menu'
+      - '&d/spawner <entity> &8- &7Set target spawner to a specific type'
+      - '&d/givespawner <player> <entity> <amount> &8- &7Give a player a spawner'
+      - '&d/givewrench <player> <amount> &8- &7Give a player a spawner wrench'
+      - '&d/spawnerwrenches reload &8- &7Reload the plugin'
+  reload: '&aPlugin reloaded successfully!'
