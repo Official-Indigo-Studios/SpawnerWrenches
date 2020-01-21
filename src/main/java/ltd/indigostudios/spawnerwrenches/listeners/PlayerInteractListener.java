@@ -23,13 +23,16 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        Player player = e.getPlayer();
         ItemStack item = e.getItem();
+        if (item == null) return;
+
+        Player player = e.getPlayer();
         Block block = e.getClickedBlock();
 
         if (!e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
-        if (block != null && !block.getType().equals(Material.SPAWNER)) return;
+        if (block == null || !block.getType().equals(Material.SPAWNER)) return;
 
+        if (!item.hasItemMeta() || item.getItemMeta() == null) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
 
