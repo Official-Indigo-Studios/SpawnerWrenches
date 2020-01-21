@@ -1,0 +1,22 @@
+main: ltd.indigostudios.spawnerwrenches.Main
+name: SpawnerWrenches
+version: ${project.version}
+api-version: 1.13
+author: TheMGRF
+description: A simple and effective Spawner System
+
+commands:
+  spawnerwrenches:
+    aliases: [sw]
+    usage: /<command>
+  spawner:
+    usage: /<command>
+  givespawner:
+    usage: /<command>
+  givewrench:
+    usage: /<command>
+
+permissions:
+  spawnerwrenches.admin:
+    description: Gives you access to the admin spawner wrenches commands
+    default: op
