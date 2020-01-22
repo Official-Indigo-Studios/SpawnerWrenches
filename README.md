@@ -27,4 +27,4 @@ PlayerPlaceSpawnerEvent
 ```
 
 ## Support
-You can find Indigo Studios and this plugin's developers on our Discord @ https://discord.gg/zVrtQvV
+You can find Indigo Studios and this plugin's developers on our Discord @ https://discord.gg/PEj96rY
