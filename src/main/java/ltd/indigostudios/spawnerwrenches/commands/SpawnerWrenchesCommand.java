@@ -17,9 +17,9 @@ public class SpawnerWrenchesCommand extends BaseCommand {
             if (args.length != 0) {
                 if (args[0].equalsIgnoreCase("reload")) {
                     // Reload language settings
-                    YML settings = main.getSettings();
-                    settings.reload();
-                    main.loadSettings(settings);
+                    YML config = new YML();
+                    config.reload();
+                    main.loadConfig(config);
 
                     // Reload command permission messages
                     main.getDescription().getCommands().keySet().forEach(pluginCmd -> {

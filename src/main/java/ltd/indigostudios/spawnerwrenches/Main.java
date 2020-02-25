@@ -18,8 +18,6 @@ public class Main extends JavaPlugin {
 
     private NamespacedKey key;
 
-    private YML settings;
-
     // TODO: Toggle for sounds/particles?
 
     public void onEnable() {
@@ -27,7 +25,7 @@ public class Main extends JavaPlugin {
 
         key = new NamespacedKey(this, "spawner-wrenches");
 
-        settings = loadSettings(new YML("settings"));
+        loadConfig(new YML());
 
         // Commands
         registerCommands(
@@ -76,17 +74,9 @@ public class Main extends JavaPlugin {
         }
     }
 
-    public YML loadSettings(YML yml) {
+    public YML loadConfig(YML yml) {
         yml.setup();
-        Language.setConfiguration(yml.getFileConfiguration());
-        for (Language message : Language.values()) {
-            if (message.getList() != null) {
-                yml.getFileConfiguration().set(message.getPath(), message.getList());
-            } else {
-                yml.getFileConfiguration().set(message.getPath(), message.getDefault());
-            }
-        }
-        yml.save();
+        Language.setConfiguration(getConfig());
 
         return yml;
     }
@@ -95,9 +85,5 @@ public class Main extends JavaPlugin {
 
     public NamespacedKey getKey() {
         return key;
-    }
-
-    public YML getSettings() {
-        return settings;
     }
 }
