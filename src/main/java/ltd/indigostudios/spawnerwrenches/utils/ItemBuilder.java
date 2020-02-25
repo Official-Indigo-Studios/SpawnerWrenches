@@ -49,7 +49,7 @@ public class ItemBuilder {
         // Use 1.14 persistent data holder to keep track of spawners
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.getPersistentDataContainer().set(Main.getInstance().getKey(), PersistentDataType.STRING, entityName);
+            meta.getPersistentDataContainer().set(Main.getInstance().getKey(), PersistentDataType.STRING, entityName.toUpperCase());
             item.setItemMeta(meta);
         }
 
