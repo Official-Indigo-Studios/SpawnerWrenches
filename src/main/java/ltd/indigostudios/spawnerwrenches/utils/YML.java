@@ -13,7 +13,7 @@ public class YML {
      */
     public void setup() {
         File file = new File(main.getDataFolder(), "config.yml");
-        if (file.exists()) {
+        if (!file.exists()) {
             main.saveDefaultConfig();
         }
     }
