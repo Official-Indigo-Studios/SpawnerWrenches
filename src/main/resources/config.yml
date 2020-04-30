@@ -38,7 +38,7 @@ Messages:
   player-not-found: '&cFailed to find a player {0}'
   commands-spawner: '&cInvalid usage. Correct usage: &7/givespawner &b<player> &e<type>
     &a[amount]'
-  commands-wrench: '&cInvalid usage. Correct usage: &7/givewrench &b<player> &a[amount]'
+  commands-wrench: '&cInvalid usage. Correct usage: &7/givewrench &b<player> &e<amount> &a[uses]'
   invalid-numerical-value: '&cInvalid numerical value entered! Please use whole numbers.'
   wrench-given: '&aGave &e{0} &a{1}x &5&lSpawner Wrench&a!'
   help-menu:
