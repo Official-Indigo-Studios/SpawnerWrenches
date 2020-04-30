@@ -1,6 +1,6 @@
 package ltd.indigostudios.spawnerwrenches.listeners;
 
-import ltd.indigostudios.spawnerwrenches.Main;
+import ltd.indigostudios.spawnerwrenches.api.Keys;
 import ltd.indigostudios.spawnerwrenches.api.events.PlayerPlaceSpawnerEvent;
 import ltd.indigostudios.spawnerwrenches.utils.Utils;
 import org.bukkit.Bukkit;
@@ -24,7 +24,7 @@ public class BlockPlaceListener implements Listener {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
 
-        NamespacedKey key = Main.getInstance().getKey();
+        NamespacedKey key = Keys.WRENCHES;
         if (container.has(key, PersistentDataType.STRING)) {
             String entityName = container.get(key, PersistentDataType.STRING);
             if (Utils.entityExists(entityName)) {

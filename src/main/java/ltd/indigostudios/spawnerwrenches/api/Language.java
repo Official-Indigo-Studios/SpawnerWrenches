@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Language {
+    PICKUP_DELAY("Functionality.pickup-delay", 0),
+    DEFAULT_WRENCH_USES("Functionality.default-wrench-uses", 1),
+
     SPAWNER_ITEM_MATERIAL("Items.spawner.material", "SPAWNER"),
     SPAWNER_ITEM_MODEL("Items.spawner.custom-model-data", 0),
     SPAWNER_ITEM_NAME("Items.spawner.name", "&d{0} &5Spawner"),
@@ -28,7 +31,7 @@ public enum Language {
             " &7it will be immediately placed into",
             " &7your inventory!",
             "",
-            " &4&l(!) &cWrench is destroyed once used!",
+            " &dUses: &a{USES}",
             "",
             "&bPurchased from &3store.example.com"
     )),
@@ -108,6 +111,10 @@ public enum Language {
 
     public List<String> getList() {
         return list;
+    }
+
+    public int toInt() {
+        return configuration.getInt(path, Integer.parseInt(def));
     }
 
     @Override

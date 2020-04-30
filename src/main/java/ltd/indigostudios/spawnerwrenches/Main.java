@@ -16,14 +16,10 @@ public class Main extends JavaPlugin {
 
     private static Main instance;
 
-    private NamespacedKey key;
-
     // TODO: Toggle for sounds/particles?
 
     public void onEnable() {
         instance = this;
-
-        key = new NamespacedKey(this, "spawner-wrenches");
 
         loadConfig(new YML());
 
@@ -82,8 +78,4 @@ public class Main extends JavaPlugin {
     }
 
     public static Main getInstance() { return instance; }
-
-    public NamespacedKey getKey() {
-        return key;
-    }
 }

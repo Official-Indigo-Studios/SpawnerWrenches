@@ -6,7 +6,7 @@
 
     <groupId>ltd.indigostudios</groupId>
     <artifactId>SpawnerWrenches</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 
     <repositories>
         <!-- Spigot API -->

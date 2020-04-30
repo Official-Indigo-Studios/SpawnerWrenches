@@ -1,3 +1,6 @@
+Functionality:
+  pickup-delay: 0
+  default-wrench-uses: 1
 Items:
   spawner:
     material: SPAWNER
@@ -22,7 +25,7 @@ Items:
       - ' &7it will be immediately placed into'
       - ' &7your inventory!'
       - ''
-      - ' &4&l(!) &cWrench is destroyed once used!'
+      - ' &dUses: &a{USES}'
       - ''
       - '&bPurchased from &3store.example.com'
 Messages:

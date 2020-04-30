@@ -1,6 +1,7 @@
 package ltd.indigostudios.spawnerwrenches.listeners;
 
 import ltd.indigostudios.spawnerwrenches.Main;
+import ltd.indigostudios.spawnerwrenches.api.Keys;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,7 @@ public class PrepareAnvilListener implements Listener {
             ItemMeta meta = item.getItemMeta();
             PersistentDataContainer container = meta.getPersistentDataContainer();
 
-            NamespacedKey key = Main.getInstance().getKey();
-            if (container.has(key, PersistentDataType.STRING)) {
+            if (container.has(Keys.WRENCHES, PersistentDataType.STRING)) {
                 e.setResult(null);
             }
         }
