@@ -33,65 +33,62 @@ public class PlayerInteractListener implements Listener {
 
         if (!e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         if (block == null || !block.getType().equals(Material.SPAWNER)) return;
+        if (!item.hasItemMeta()) return;
 
-        if (!item.hasItemMeta() || item.getItemMeta() == null) return;
         ItemMeta meta = item.getItemMeta();
+        if (meta == null) return;
+
         PersistentDataContainer container = meta.getPersistentDataContainer();
+        String type = container.get(Keys.WRENCHES, PersistentDataType.STRING);
+        if (type == null || type.isEmpty()) return;
+        if (!type.equalsIgnoreCase("wrench")) return;
 
-        NamespacedKey wrenches = Keys.WRENCHES;
-        NamespacedKey wrenchUses = Keys.USES;
-        if (container.has(wrenches, PersistentDataType.STRING)) {
-            if (container.get(wrenches, PersistentDataType.STRING).equalsIgnoreCase("wrench")) {
-                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                    EntityType entityType = ((CreatureSpawner) block.getState()).getSpawnedType();
-                    PlayerPickUpSpawnerEvent event = new PlayerPickUpSpawnerEvent(player, block, entityType);
-                    Bukkit.getPluginManager().callEvent(event);
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            EntityType entityType = ((CreatureSpawner) block.getState()).getSpawnedType();
 
-                    if (!event.isCancelled()) {
-                        player.playSound(player.getLocation(), Sound.BLOCK_METAL_BREAK, 1, 1);
-                        block.getWorld().spawnParticle(Particle.SPELL_WITCH, block.getLocation().add(0.5, 0.5, 0.5), 30, 0.5, 0.5, 0.5);
-                        block.setType(Material.AIR);
+            PlayerPickUpSpawnerEvent event = new PlayerPickUpSpawnerEvent(player, block, entityType);
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled()) return;
 
-                        boolean remove = true;
-                        if (container.has(wrenchUses, PersistentDataType.INTEGER)) {
-                            int uses = container.get(wrenchUses, PersistentDataType.INTEGER);
-                            if (uses > 1) {
-                                remove = false;
-                                int newUses = (uses - 1);
-                                ItemBuilder.updateUses(item, newUses);
-                            } else {
-                                remove = true;
-                            }
-                        }
+            player.playSound(player.getLocation(), Sound.BLOCK_METAL_BREAK, 1, 1);
+            block.getWorld().spawnParticle(Particle.SPELL_WITCH, block.getLocation().add(0.5, 0.5, 0.5), 30, 0.5, 0.5, 0.5);
+            block.setType(Material.AIR);
 
-                        if (remove) {
-                            if (item.getAmount() > 1) {
-                                item.setAmount(item.getAmount() - 1);
-                            } else {
-                                item.setAmount(0);
-                            }
-                            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 0.5f);
-                        }
-
-                        HashMap<Integer, ItemStack> items = player.getInventory().addItem(ItemBuilder.getSpawner(entityType.name()));
-                        player.updateInventory();
-                        if (!items.isEmpty()) {
-                            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                                for (ItemStack leftover : items.values()) {
-                                    block.getWorld().dropItem(block.getLocation().add(0.5, 0.5, 0.5), leftover);
-                                }
-                            }, 1);
-                        }
-
-                        player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_OPEN, 0.5f, 0);
-                        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.5f, 0);
-                            player.playSound(player.getLocation(), Sound.ITEM_SHIELD_BLOCK, 0.5f, 0);
-                        }, 10);
-                    }
-                }, 20 * Language.PICKUP_DELAY.toInt());
+            boolean remove = true;
+            Integer uses = container.get(Keys.USES, PersistentDataType.INTEGER);
+            if (uses != null) {
+                if (uses > 1) {
+                    remove = false;
+                    int newUses = (uses - 1);
+                    ItemBuilder.updateUses(item, newUses);
+                }
             }
-        }
+
+            if (remove) {
+                if (item.getAmount() > 1) {
+                    item.setAmount(item.getAmount() - 1);
+                } else {
+                    item.setAmount(0);
+                }
+                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 0.5f);
+            }
+
+            HashMap<Integer, ItemStack> items = player.getInventory().addItem(ItemBuilder.getSpawner(entityType.name()));
+            player.updateInventory();
+            if (!items.isEmpty()) {
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                    for (ItemStack leftover : items.values()) {
+                        block.getWorld().dropItem(block.getLocation().add(0.5, 0.5, 0.5), leftover);
+                    }
+                }, 1);
+            }
+
+            player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_OPEN, 0.5f, 0);
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                player.playSound(player.getLocation(), Sound.BLOCK_IRON_DOOR_CLOSE, 0.5f, 0);
+                player.playSound(player.getLocation(), Sound.ITEM_SHIELD_BLOCK, 0.5f, 0);
+            }, 10);
+        }, 20L * Language.PICKUP_DELAY.toInt());
     }
 
 }

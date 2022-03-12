@@ -21,26 +21,27 @@ public class BlockPlaceListener implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
         ItemStack item = e.getItemInHand();
+        if (!item.hasItemMeta()) return;
+
         ItemMeta meta = item.getItemMeta();
+        if (meta == null) return;
+
         PersistentDataContainer container = meta.getPersistentDataContainer();
+        if (!container.has(Keys.WRENCHES, PersistentDataType.STRING)) return;
 
-        NamespacedKey key = Keys.WRENCHES;
-        if (container.has(key, PersistentDataType.STRING)) {
-            String entityName = container.get(key, PersistentDataType.STRING);
-            if (Utils.entityExists(entityName)) {
-                EntityType entityType = EntityType.valueOf(entityName);
+        String entityName = container.get(Keys.WRENCHES, PersistentDataType.STRING);
+        if (!Utils.entityExists(entityName)) return;
 
-                PlayerPlaceSpawnerEvent event = new PlayerPlaceSpawnerEvent(e.getPlayer(), e.getBlock(), entityType);
-                Bukkit.getPluginManager().callEvent(event);
+        EntityType entityType = EntityType.valueOf(entityName);
 
-                if (!event.isCancelled()) {
-                    e.getBlock().setType(Material.SPAWNER);
-                    CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
-                    spawner.setSpawnedType(entityType);
-                    spawner.update();
-                }
-            }
-        }
+        PlayerPlaceSpawnerEvent event = new PlayerPlaceSpawnerEvent(e.getPlayer(), e.getBlock(), entityType);
+        Bukkit.getPluginManager().callEvent(event);
+        if (event.isCancelled()) return;
+
+        e.getBlock().setType(Material.SPAWNER);
+        CreatureSpawner spawner = (CreatureSpawner) e.getBlock().getState();
+        spawner.setSpawnedType(entityType);
+        spawner.update();
     }
 
 }

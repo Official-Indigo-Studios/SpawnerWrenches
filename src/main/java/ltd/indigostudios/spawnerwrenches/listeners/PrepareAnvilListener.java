@@ -1,8 +1,6 @@
 package ltd.indigostudios.spawnerwrenches.listeners;
 
-import ltd.indigostudios.spawnerwrenches.Main;
 import ltd.indigostudios.spawnerwrenches.api.Keys;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
@@ -16,14 +14,15 @@ public class PrepareAnvilListener implements Listener {
     @EventHandler
     public void onPrepare(PrepareAnvilEvent e) {
         ItemStack item = e.getResult();
+        if (item == null) return;
+        if (!item.hasItemMeta()) return;
 
-        if (item != null && item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            PersistentDataContainer container = meta.getPersistentDataContainer();
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return;
 
-            if (container.has(Keys.WRENCHES, PersistentDataType.STRING)) {
-                e.setResult(null);
-            }
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        if (container.has(Keys.WRENCHES, PersistentDataType.STRING)) {
+            e.setResult(null);
         }
 
         //if (e.getResult().getType() == Material.SPAWNER) e.setResult(null);

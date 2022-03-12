@@ -6,6 +6,7 @@ public class Utils {
 
     /**
      * Check to see if an entity type exists
+     *
      * @param entityName The entity type to check
      * @return <code>true</code> if the entity type exits; <code>false</code> if the entity type does not exist
      */

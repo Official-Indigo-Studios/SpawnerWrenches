@@ -19,37 +19,40 @@ public class GiveSpawnerCommand extends BaseCommand {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender.hasPermission(getPermission())) {
-            if (args.length == 3) {
-                if (Bukkit.getPlayer(args[0]) != null) {
-                    String entityName = Text.convertUnformattedString(args[1]);
-                    if (Utils.entityExists(args[1].toUpperCase())) {
-                        Player target = Bukkit.getPlayer(args[0]);
-
-                        int amount = 1;
-                        if (StringUtils.isNumeric(args[2])) {
-                            amount = Integer.parseInt(args[2]);
-                            ItemStack item = ItemBuilder.getSpawner(args[1]);
-                            item.setAmount(amount);
-
-                            sender.sendMessage(Text.colour(Language.SPAWNER_GIVEN.toString().replace("{0}", args[0]).replace("{1}", Integer.toString(amount)).replace("{2}", entityName)));
-                            target.getInventory().addItem(item);
-                        } else {
-                            sender.sendMessage(Text.colour(Language.INVALID_NUMERICAL_VALUE.toString()));
-                        }
-                    } else {
-                        sender.sendMessage(Text.colour(Language.SPAWNER_INVALID_ENTITY.toString().replace("{0}", entityName)));
-                    }
-                } else {
-
-                    sender.sendMessage(Text.colour(Language.PLAYER_NOT_FOUND.toString().replace("{0}", args[0])));
-                }
-            } else {
-                sender.sendMessage(Text.colour(Language.COMMAND_USAGE_SPAWNER.toString()));
-            }
-        } else {
+        if (!sender.hasPermission(getPermission())) {
             sender.sendMessage(Text.colour(Language.NO_PERMISSION.toString()));
+            return true;
         }
+
+        if (args.length < 3) {
+            sender.sendMessage(Text.colour(Language.COMMAND_USAGE_SPAWNER.toString()));
+            return true;
+        }
+
+        Player target = Bukkit.getPlayer(args[0]);
+        if (target == null) {
+            sender.sendMessage(Text.colour(Language.PLAYER_NOT_FOUND.toString().replace("{0}", args[0])));
+            return true;
+        }
+
+        String entityName = Text.convertUnformattedString(args[1]);
+        if (!Utils.entityExists(args[1].toUpperCase())) {
+            sender.sendMessage(Text.colour(Language.SPAWNER_INVALID_ENTITY.toString().replace("{0}", entityName)));
+            return true;
+        }
+
+        int amount = 1;
+        if (StringUtils.isNumeric(args[2])) {
+            amount = Integer.parseInt(args[2]);
+            ItemStack item = ItemBuilder.getSpawner(args[1]);
+            item.setAmount(amount);
+
+            sender.sendMessage(Text.colour(Language.SPAWNER_GIVEN.toString().replace("{0}", args[0]).replace("{1}", Integer.toString(amount)).replace("{2}", entityName)));
+            target.getInventory().addItem(item);
+        } else {
+            sender.sendMessage(Text.colour(Language.INVALID_NUMERICAL_VALUE.toString()));
+        }
+
         return true;
     }
 

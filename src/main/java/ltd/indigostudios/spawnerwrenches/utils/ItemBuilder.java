@@ -91,6 +91,8 @@ public class ItemBuilder {
      */
     public static void updateUses(ItemStack item, int uses) {
         ItemMeta meta = item.getItemMeta();
+        if (meta == null) return;
+
         List<String> lore = new ArrayList<>();
         for (String loreLine : Language.WRENCH_ITEM_LORE.toList()) {
             lore.add(loreLine.replace("{USES}", String.valueOf(uses)));

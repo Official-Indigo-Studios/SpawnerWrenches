@@ -5,9 +5,9 @@ import org.bukkit.NamespacedKey;
 
 public class Keys {
 
-    private static final Main main = Main.getInstance();
+    private static final Main MAIN = Main.getInstance();
 
-    public static final NamespacedKey WRENCHES = new NamespacedKey(main, "spawner-wrenches");
-    public static final NamespacedKey USES = new NamespacedKey(main, "wrench-uses");
+    public static final NamespacedKey WRENCHES = new NamespacedKey(MAIN, "spawner-wrenches");
+    public static final NamespacedKey USES = new NamespacedKey(MAIN, "wrench-uses");
 
 }

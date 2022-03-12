@@ -4,27 +4,22 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 
-public abstract class PlayerSpawnerEvent extends Event implements Cancellable {
+public abstract class PlayerSpawnerEvent extends PlayerEvent implements Cancellable {
 
-    private static HandlerList handlers = new HandlerList();
+    private static final HandlerList HANDLER_LIST = new HandlerList();
 
-    private Player player;
-    private Block block;
-    private EntityType entityType;
+    private final Block block;
+    private final EntityType entityType;
     private boolean isCancelled;
 
     public PlayerSpawnerEvent(Player player, Block block, EntityType entityType) {
-        this.player = player;
+        super(player);
         this.block = block;
         this.entityType = entityType;
         this.isCancelled = false;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public Block getBlock() {
@@ -44,11 +39,11 @@ public abstract class PlayerSpawnerEvent extends Event implements Cancellable {
     }
 
     public static HandlerList getHandlerList() {
-        return handlers;
+        return HANDLER_LIST;
     }
 
     public HandlerList getHandlers() {
-        return handlers;
+        return HANDLER_LIST;
     }
 
 }

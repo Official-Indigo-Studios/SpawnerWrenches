@@ -8,6 +8,7 @@ public class Text {
 
     /**
      * Format a string to contain Bukkit colour codes
+     *
      * @param msg The message to colour
      * @return The formatted colour coded string
      */
@@ -17,6 +18,7 @@ public class Text {
 
     /**
      * Format an array to contain Bukkit colour codes
+     *
      * @param msgs The array to colour
      * @return The formatted colour coded array
      */
@@ -29,22 +31,23 @@ public class Text {
 
     /**
      * Convert a bukkit string value to a readable string
+     *
      * @param old The old string value to convert
      * @return The readable string value
      */
     public static String convertUnformattedString(String old) {
 
         String convert = old.toLowerCase().replaceAll("\\_", " ");
-        String newValue = "";
+        StringBuilder newValue = new StringBuilder();
 
         boolean space = true;
         for (int i = 0; i < convert.length(); i++) {
-            if (space) newValue += Character.toUpperCase(convert.charAt(i));
-            else newValue += convert.charAt(i);
+            if (space) newValue.append(Character.toUpperCase(convert.charAt(i)));
+            else newValue.append(convert.charAt(i));
             space = convert.charAt(i) == ' ';
         }
 
-        return newValue;
+        return newValue.toString();
     }
 
 }

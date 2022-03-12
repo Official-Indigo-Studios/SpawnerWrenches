@@ -48,6 +48,6 @@ Messages:
       - '&d/spawnerwrenches help &8- &7View the plugin help menu'
       - '&d/spawner <entity> &8- &7Set target spawner to a specific type'
       - '&d/givespawner <player> <entity> <amount> &8- &7Give a player a spawner'
-      - '&d/givewrench <player> <amount> &8- &7Give a player a spawner wrench'
+      - '&d/givewrench <player> <amount> [uses] &8- &7Give a player a spawner wrench'
       - '&d/spawnerwrenches reload &8- &7Reload the plugin'
   reload: '&aPlugin reloaded successfully!'

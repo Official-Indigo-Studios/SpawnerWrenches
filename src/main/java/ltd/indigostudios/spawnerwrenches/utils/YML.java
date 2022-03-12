@@ -6,7 +6,7 @@ import java.io.File;
 
 public class YML {
 
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     /**
      * Setup the config file if necessary

@@ -6,10 +6,9 @@ import ltd.indigostudios.spawnerwrenches.utils.Text;
 import ltd.indigostudios.spawnerwrenches.utils.YML;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 
 public class SpawnerWrenchesCommand extends BaseCommand {
-
-    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -19,11 +18,14 @@ public class SpawnerWrenchesCommand extends BaseCommand {
                     // Reload language settings
                     YML config = new YML();
                     config.reload();
-                    main.loadConfig(config);
+                    Main.getInstance().loadConfig(config);
 
                     // Reload command permission messages
-                    main.getDescription().getCommands().keySet().forEach(pluginCmd -> {
-                        main.getCommand(pluginCmd).setPermissionMessage(Text.colour(Language.NO_PERMISSION.toString()));
+                    Main.getInstance().getDescription().getCommands().keySet().forEach(name -> {
+                        PluginCommand pCmd = Main.getInstance().getCommand(name);
+                        if (pCmd == null) return;
+
+                        pCmd.setPermissionMessage(Text.colour(Language.NO_PERMISSION.toString()));
                     });
 
                     sender.sendMessage(Text.colour(Language.RELOAD.toString()));
